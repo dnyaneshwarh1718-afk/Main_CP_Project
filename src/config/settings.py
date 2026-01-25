@@ -12,6 +12,10 @@ LOG_DIR = OITPUTS_DIR / "logs"
 MODEL_DIR = OITPUTS_DIR / "models"
 REPORTS_DIR = OITPUTS_DIR / "reports"
 
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
+REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
 for folder in [RAW_DATA_DIR, LOG_DIR, MODEL_DIR, REPORTS_DIR]:
     folder.mkdir(parents = True, exist_ok = True)
 
