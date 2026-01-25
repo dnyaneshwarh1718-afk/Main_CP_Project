@@ -1,0 +1,6 @@
+[2026-01-26 02:27:05,820 INFO -Fetching loan_master data...]
+[2026-01-26 02:27:06,087 INFO -loan_master shape: (682, 37)]
+[2026-01-26 02:27:06,087 INFO -Training multiple models and selecting best...]
+[2026-01-26 02:27:14,037 INFO -Best Model: AdaBoost]
+[2026-01-26 02:27:14,037 INFO -Best Model Saved: R:\Data Science Top mentor\Main_Capstone_Project\outputs\models\best_model_pipeline.pkl]
+[2026-01-26 02:27:14,037 INFO -Metrics Saved: R:\Data Science Top mentor\Main_Capstone_Project\outputs\reports\best_model_metrics.json]
