@@ -13,12 +13,12 @@ def get_models(random_state: int = 42):
     "RidgeClassifier": RidgeClassifier(class_weight="balanced"),
     "RandomForest": RandomForestClassifier(
         n_estimators=300,
-        random_state=random_state
+        random_state=random_state,
         class_weight="balanced"
     ),
     "ExtraTrees": ExtraTreesClassifier(
          n_estimators=300,
-        random_state=random_state
+        random_state=random_state,
         class_weight="balanced"
     ),
     "xgBoost": XGBClassifier(
