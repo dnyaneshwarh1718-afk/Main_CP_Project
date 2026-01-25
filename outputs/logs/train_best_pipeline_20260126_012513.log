@@ -1,0 +1,3 @@
+[2026-01-26 01:34:35,633 INFO -Fetchingloan_master data]
+[2026-01-26 01:34:36,055 INFO -loan_master shape: (682, 37)]
+[2026-01-26 01:34:36,055 INFO -Training multiple models and selecting best]

@@ -1,0 +1,3 @@
+[2026-01-25 17:22:27,345 INFO -Running: 1_raw_schema_fix_and_index.sql]
+[2026-01-25 17:22:27,619 ERROR -failed: 1_raw_schema_fix_and_index.sql]
+[2026-01-25 17:22:27,620 ERROR -1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'U' at line 1]

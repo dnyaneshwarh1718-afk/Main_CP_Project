@@ -1,0 +1,96 @@
+{
+    "best_model": "AdaBoost",
+    "best_threshold": 0.42000000000000004,
+    "best_test_f1": 0.4897959183673469,
+    "all_models": [
+        {
+            "model": "LogisticRegression",
+            "best_threshold_val": 0.6600000000000001,
+            "val_f1": 0.5,
+            "test_accuracy": 0.8467153284671532,
+            "test_f1": 0.4878048780487805,
+            "test_auc": 0.8612021857923498
+        },
+        {
+            "model": "RidgeClassifier",
+            "best_threshold_val": null,
+            "val_f1": null,
+            "test_accuracy": 0.781021897810219,
+            "test_f1": 0.4827586206896552,
+            "test_auc": null
+        },
+        {
+            "model": "RandomForest",
+            "best_threshold_val": 0.12000000000000001,
+            "val_f1": 0.4166666666666667,
+            "test_accuracy": 0.781021897810219,
+            "test_f1": 0.4444444444444444,
+            "test_auc": 0.8382513661202186
+        },
+        {
+            "model": "ExtraTrees",
+            "best_threshold_val": 0.14,
+            "val_f1": 0.4090909090909091,
+            "test_accuracy": 0.7445255474452555,
+            "test_f1": 0.38596491228070173,
+            "test_auc": 0.7953551912568306
+        },
+        {
+            "model": "GradientBoosting",
+            "best_threshold_val": 0.1,
+            "val_f1": 0.4186046511627907,
+            "test_accuracy": 0.8102189781021898,
+            "test_f1": 0.43478260869565216,
+            "test_auc": 0.8568306010928962
+        },
+        {
+            "model": "AdaBoost",
+            "best_threshold_val": 0.42000000000000004,
+            "val_f1": 0.5,
+            "test_accuracy": 0.8175182481751825,
+            "test_f1": 0.4897959183673469,
+            "test_auc": 0.8882513661202186
+        },
+        {
+            "model": "GaussianNB",
+            "best_threshold_val": 0.7000000000000002,
+            "val_f1": 0.2653061224489796,
+            "test_accuracy": 0.44525547445255476,
+            "test_f1": 0.2692307692307692,
+            "test_auc": 0.7092896174863388
+        },
+        {
+            "model": "KNN",
+            "best_threshold_val": 0.05,
+            "val_f1": 0.2857142857142857,
+            "test_accuracy": 0.7007299270072993,
+            "test_f1": 0.36923076923076925,
+            "test_auc": 0.764207650273224
+        },
+        {
+            "model": "SVM",
+            "best_threshold_val": 0.1,
+            "val_f1": 0.39344262295081966,
+            "test_accuracy": 0.7153284671532847,
+            "test_f1": 0.4,
+            "test_auc": 0.8289617486338798
+        },
+        {
+            "model": "XGBoost",
+            "best_threshold_val": 0.05,
+            "val_f1": 0.41025641025641024,
+            "test_accuracy": 0.7956204379562044,
+            "test_f1": 0.391304347826087,
+            "test_auc": 0.8087431693989071
+        },
+        {
+            "model": "LightGBM",
+            "best_threshold_val": 0.18000000000000005,
+            "val_f1": 0.41379310344827586,
+            "test_accuracy": 0.8321167883211679,
+            "test_f1": 0.30303030303030304,
+            "test_auc": 0.8005464480874317
+        }
+    ],
+    "note": "Threshold tuned on Validation set, evaluated on Test set (no leakage)"
+}

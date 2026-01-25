@@ -1,0 +1,4 @@
+[2026-01-25 17:33:50,927 INFO -Running: 1_raw_schema_fix_and_index.sql]
+[2026-01-25 17:33:52,909 INFO -Running: 2_data_cleaning_views.sql]
+[2026-01-25 17:33:53,271 INFO -Running: 3_data_validation.sql]
+[2026-01-25 17:33:53,586 ERROR -Unread result found]

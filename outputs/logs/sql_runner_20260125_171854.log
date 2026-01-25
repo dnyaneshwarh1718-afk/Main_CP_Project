@@ -1,0 +1,7 @@
+[2026-01-25 17:19:00,811 INFO -Running: 1_raw_schema_fix_and_index.sql]
+[2026-01-25 17:19:01,092 ERROR -failed: 1_raw_schema_fix_and_index.sql]
+[2026-01-25 17:19:01,093 ERROR -1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1) Standardize RAW datatypes 
+
+ ACCOUNT
+ALTER TABLE account
+MODIFY frequency VAR' at line 1]
