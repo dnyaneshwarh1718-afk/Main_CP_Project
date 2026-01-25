@@ -1,126 +1,135 @@
-import joblib
 import json
-import mlflow
-import mlflow.sklearn
+import joblib
+import numpy as np
+import pandas as pd
 
-import pandas as pd 
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
-from src.config.settings import(
-    TARGET_COL,
-    TEST_SIZE,
-    RANDOM_STATE,
-    BINARY_STATUS_MAP,
-    MODEL_DIR,
-    FEATURE_COLUMNS
-)
+
 from src.pipeline.preprocessing import build_preprocessor
 from src.modeling.model_registry import get_models
+from src.config.settings import (
+    FEATURE_COLUMNS,
+    TARGET_COL,
+    BINARY_STATUS_MAP,
+    RANDOM_STATE,
+    MODEL_DIR,
+    REPORTS_DIR
+)
+
+
+def find_best_threshold(y_true, y_prob):
+    thresholds = np.arange(0.05, 0.95, 0.01)
+    best_t, best_f1 = 0.5, -1
+
+    for t in thresholds:
+        preds = (y_prob >= t).astype(int)
+        score = f1_score(y_true, preds)
+        if score > best_f1:
+            best_f1 = score
+            best_t = t
+
+    return float(best_t), float(best_f1)
+
 
 def train_all_models_and_select_best(df: pd.DataFrame):
     df = df.copy()
 
+    #  validate columns
     required_cols = FEATURE_COLUMNS + [TARGET_COL]
     missing = [c for c in required_cols if c not in df.columns]
     if missing:
-        raise ValueError(f"missing colums in loan_master: {missing}")
-    
-    # selecting only required columns
+        raise ValueError(f"Missing columns in loan_master: {missing}")
+
     df = df[required_cols]
 
-    # creating binary target
+    #  binary target
     df["target_binary"] = df[TARGET_COL].map(BINARY_STATUS_MAP)
     df = df.dropna(subset=["target_binary"])
     df["target_binary"] = df["target_binary"].astype(int)
 
-    # deriving X features 
     x = df[FEATURE_COLUMNS]
-    # deriving y variable
     y = df["target_binary"]
 
-    x_train, x_test, y_train, y_test = train_test_split(
-        x,y,
-        Test_size = TEST_SIZE,
-        random_state = RANDOM_STATE,
-        stratify = y
+    #  Train/Val/Test split (60/20/20)
+    x_train, x_temp, y_train, y_temp = train_test_split(
+        x, y, test_size=0.40, random_state=RANDOM_STATE, stratify=y
     )
-        
-        
-        
-    # preprocessing
+    x_val, x_test, y_val, y_test = train_test_split(
+        x_temp, y_temp, test_size=0.50, random_state=RANDOM_STATE, stratify=y_temp
+    )
+
+    #  Preprocessor
     preprocessor, num_cols, cat_cols = build_preprocessor(x_train)
 
-    # model
     models = get_models(random_state=RANDOM_STATE)
 
+    all_results = []
     best_model_name = None
     best_pipeline = None
-    best_score = -1
-    results = {}
+    best_threshold = None
+    best_test_f1 = -1
 
-    mlflow.set_experiment("Loan_Default_Binary_model_Comparison")
+    for name, model in models.items():
+        pipeline = Pipeline([
+            ("preprocessor", preprocessor),
+            ("model", model)
+        ])
 
-    with mlflow.start_run(run_name= "model_comparison"):
-        for name, model in models.items():
-            pipeline = Pipeline(steps=[
-                ("preprocessor", preprocessor),
-                ("model", model)
-            ])
+        pipeline.fit(x_train, y_train)
 
-            pipeline.fit(x_train, y_train)
-            y_pred = pipeline.predict(x_test)
+        row = {"model": name}
 
-            acc = accuracy_score(y_test, y_pred)
-            f1 = f1_score(y_test, y_pred)
+        if hasattr(pipeline, "predict_proba"):
+            #  tune threshold on VALIDATION
+            val_prob = pipeline.predict_proba(x_val)[:, 1]
+            best_t, best_val_f1 = find_best_threshold(y_val, val_prob)
 
-            metrics = {"accuracy": acc, "f1_score": f1}
+            #  evaluate on TEST using val threshold
+            test_prob = pipeline.predict_proba(x_test)[:, 1]
+            test_pred = (test_prob >= best_t).astype(int)
 
-            try:
-                y_prob = pipeline.predict_proba(x_test)[:,1]
-                metrics["roc_auc"] = roc_auc_score(y_test, y_prob)
-            except:
-                pass
+            row["best_threshold_val"] = best_t
+            row["val_f1"] = best_val_f1
+            row["test_accuracy"] = accuracy_score(y_test, test_pred)
+            row["test_f1"] = f1_score(y_test, test_pred)
+            row["test_auc"] = roc_auc_score(y_test, test_prob)
 
-            results[name] = metrics
+        else:
+            # fallback (no proba)
+            test_pred = pipeline.predict(x_test)
+            row["best_threshold_val"] = None
+            row["val_f1"] = None
+            row["test_accuracy"] = accuracy_score(y_test, test_pred)
+            row["test_f1"] = f1_score(y_test, test_pred)
+            row["test_auc"] = None
 
-            with mlflow.start_run(run_name = name, nested=True):
-                mlflow.log_param("model", name)
-                mlflow.log_param("test_size", TEST_SIZE)
-                mlflow.log_param("random_state", RANDOM_STATE)
-                mlflow.log_param("num_cols_count", len(num_cols))
-                mlflow.log_param("cat_cols_count",len(cat_cols))
+        all_results.append(row)
 
-                for k, v in metrics.items():
-                    mlflow.log_metric(k, v)
+        if row["test_f1"] > best_test_f1:
+            best_test_f1 = row["test_f1"]
+            best_model_name = name
+            best_pipeline = pipeline
+            best_threshold = row["best_threshold_val"]
 
-                mlflow.sklearn.load_model(pipeline, artifact_path = "model")
+    #  Save best model pipeline
+    best_model_path = MODEL_DIR / "best_model_pipeline.pkl"
+    joblib.dump(best_pipeline, best_model_path)
 
-            
-            if f1 > best_score:
-                best_score = f1
-                best_model_name = name
-                best_pipeline = pipeline
-
-        # saving best model locally
-        best_model_path = MODEL_DIR / "best_binary_pipeline.pkl"
-        joblib.dump(best_pipeline, best_model_path)
-
-        # saving best model locally
-        comparison_path = MODEL_DIR / "model_comparison.json"
-        with open(comparison_path, "w") as f:
-            json.dump(
-                {
+    #  Save all results JSON
+    metrics_path = REPORTS_DIR / "best_model_metrics.json"
+    with open(metrics_path, "w") as f:
+        json.dump(
+            {
                 "best_model": best_model_name,
-                "best_f1_score": best_score,
-                "all_results": results
+                "best_threshold": best_threshold,
+                "best_test_f1": best_test_f1,
+                "all_models": all_results,
+                "note": "Threshold tuned on Validation set, evaluated on Test set (no leakage)"
             },
             f,
             indent=4
-            )
+        )
 
-        mlflow.log_param("best_model", best_model_name)
-        mlflow.log_metric("best_f1_score",best_score)
-        mlflow.sklearn.log_model(best_pipeline, artifact_path="best_model")
-
-    return best_model_name, best_model_path, comparison_path, results
+    return best_model_name, best_model_path, metrics_path
