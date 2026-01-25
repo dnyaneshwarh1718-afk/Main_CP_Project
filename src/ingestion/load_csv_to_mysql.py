@@ -11,7 +11,7 @@ logger = setup_logger("load_csv_to_mysql")
 
 load_dotenv()
 
-#  File -> MySQL table mapping (important for transaction_data.csv)
+
 TABLE_MAP = {
     "account.csv": "account",
     "card.csv": "card",
@@ -20,7 +20,7 @@ TABLE_MAP = {
     "district.csv": "district",
     "loan.csv": "loan",
     "orders.csv": "orders",
-    "transaction_data.csv": "trans",
+    "transaction_data.csv": "transaction_data",
 }
 
 
