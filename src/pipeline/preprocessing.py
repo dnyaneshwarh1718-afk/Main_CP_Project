@@ -4,13 +4,11 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.impute import SimpleImputer
 
-def build_preprocessor(df: pd.DataFrame, target_col: str):
+def build_preprocessor(x: pd.DataFrame):
     """
     returns: preprocessor (ColumnTransformer)
     feature_columns (list)
     """
-
-    x = df.drop(columns = [target_col])
 
     # split column type
 
