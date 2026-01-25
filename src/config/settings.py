@@ -28,6 +28,14 @@ SQL_FILES = [
 # ML Config
 RANDOM_STATE = 42
 TEST_SIZE = 0.2
+
+FEATURE_COLUMNS = [
+    "Loan_Amount", "Duration", "Payments",
+    "Region", "Avg_Salary", "Avg_Unemployment_Rate", "Entrepreneurs_Per_1000",
+    "Txn_Count", "Avg_Balance", "Balance_Volatility", "Net_Cashflow",
+    "Is_Joint_Account", "Has_Card", "Gold_Card_Count",
+    "Total_Order_Amount", "Avg_Trans_Amount"
+]
 TARGET_COL = "Status"
 
 BINARY_STATUS_MAP = {"A":0, "C":0, "B":1, "D": 1}
