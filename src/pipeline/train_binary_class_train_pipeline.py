@@ -1,5 +1,5 @@
 from src.features.fetch_master import fetch_master_table
-from src.modeling.train_best_model import train_all_models_and_select_best
+from src.modeling.train_binary_class_model import train_all_models_and_select_best
 from src.utils.logger import setup_logger
 
 logger = setup_logger("train_best_pipeline")
