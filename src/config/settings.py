@@ -11,10 +11,12 @@ OITPUTS_DIR = PROJECT_ROOT / "outputs"
 LOG_DIR = OITPUTS_DIR / "logs"
 MODEL_DIR = OITPUTS_DIR / "models"
 REPORTS_DIR = OITPUTS_DIR / "reports"
+PREDICTIONS_DIR = OITPUTS_DIR / "predictions"
 
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 LOG_DIR.mkdir(parents=True, exist_ok=True)
+PREDICTIONS_DIR.mkdir(exist_ok=True)
 
 for folder in [RAW_DATA_DIR, LOG_DIR, MODEL_DIR, REPORTS_DIR]:
     folder.mkdir(parents = True, exist_ok = True)
