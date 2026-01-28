@@ -83,21 +83,22 @@ def train_multiclass_models(df: pd.DataFrame):
             "test_accuracy": accuracy_score(y_test, test_pred),
             "test_f1_macro": f1_score(y_test, test_pred, average="macro"),
             "test_f1_weighted": f1_score(y_test, test_pred, average="weighted"),
+            "Classification_report": classification_report(y_test, test_pred),
         }
 
         results.append(row)
 
-        # ✅ Select best using VAL macro F1 (fair multiclass metric)
+        #  Select best using VAL macro F1 (fair multiclass metric)
         if row["val_f1_macro"] > best_val_f1:
             best_val_f1 = row["val_f1_macro"]
             best_model_name = name
             best_pipeline = pipeline
 
-    # ✅ Save best multiclass model
+    #  Save best multiclass model
     best_model_path = MODEL_DIR / "best_multiclass_pipeline.pkl"
     joblib.dump(best_pipeline, best_model_path)
 
-    # ✅ Save report
+    #  Save report
     report_path = REPORTS_DIR / "multiclass_model_metrics.json"
     with open(report_path, "w") as f:
         json.dump(
