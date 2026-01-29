@@ -5,7 +5,7 @@ import pandas as pd
 
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, f1_score, classification_report
+from sklearn.metrics import accuracy_score, f1_score
 
 from src.pipeline.preprocessing import build_preprocessor
 from src.modeling.model_registry import get_models
@@ -83,7 +83,7 @@ def train_multiclass_models(df: pd.DataFrame):
             "test_accuracy": accuracy_score(y_test, test_pred),
             "test_f1_macro": f1_score(y_test, test_pred, average="macro"),
             "test_f1_weighted": f1_score(y_test, test_pred, average="weighted"),
-            "Classification_report": classification_report(y_test, test_pred),
+        
         }
 
         results.append(row)

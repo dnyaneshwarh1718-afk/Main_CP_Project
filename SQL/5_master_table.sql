@@ -70,8 +70,8 @@ LEFT JOIN card_agg ca
     ON ln.account_id = ca.account_id
 LEFT JOIN disp_agg da
     ON ln.account_id = da.account_id
-LEFT JOIN district dist
-    ON acc.district_id = dist.a1;
+LEFT JOIN vw_clean_district dist
+    ON acc.district_id = dist.district_id;
 
 
 -- Main SQL Query

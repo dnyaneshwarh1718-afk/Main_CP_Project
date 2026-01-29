@@ -36,12 +36,6 @@ MODIFY account VARCHAR(50);
 ALTER TABLE client
 MODIFY birth_number INT;
 
--- district
-UPDATE district
-SET unemployment_rate_2 = NULL
-WHERE unemployment_rate_2 = '?';
-
-
 -- 2) Add GENERATED STORED Date columns -- 
 
 DELIMITER $$

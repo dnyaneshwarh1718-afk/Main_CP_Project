@@ -40,7 +40,7 @@ FEATURE_COLUMNS = [
     "Region", "Avg_Salary", "Avg_Unemployment_Rate", "Entrepreneurs_Per_1000",
     "Txn_Count", "Avg_Balance", "Balance_Volatility", "Net_Cashflow",
     "Is_Joint_Account", "Has_Card", "Gold_Card_Count",
-    "Total_Order_Amount", "Avg_Trans_Amount"
+    "Total_Order_Amount", "Avg_Trans_Amount","Unemployment_Rate_1","Unemployment_Rate_2","Crimes_1"
 ]
 TARGET_COL = "Status"
 

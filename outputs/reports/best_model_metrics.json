@@ -1,98 +1,59 @@
 {
     "best_model": "AdaBoost",
-    "best_threshold": 0.42000000000000004,
-    "best_test_f1": 0.4897959183673469,
-    "all_models": [
+    "best_threshold": 0.4100000000000001,
+    "validation_f1": 0.5116279069767442,
+    "test_metrics": {
+        "test_accuracy": 0.8175182481751825,
+        "test_f1": 0.46808510638297873,
+        "test_auc": 0.8956284153005465,
+        "recall_risky_(B/D=1)": 0.7333333333333333
+    },
+    "all_models_validation": [
         {
             "model": "LogisticRegression",
-            "best_threshold_val": 0.6600000000000001,
-            "val_f1": 0.5,
-            "test_accuracy": 0.8467153284671532,
-            "test_f1": 0.4878048780487805,
-            "test_auc": 0.8612021857923498,
-            "recall_risky_(B/D=1)": 0.6666666666666666
-        },
-        {
-            "model": "RidgeClassifier",
-            "best_threshold_val": null,
-            "val_f1": null,
-            "test_accuracy": 0.781021897810219,
-            "test_f1": 0.4827586206896552,
-            "test_auc": null,
-            "recall_risky_(B/D=1)": 0.9333333333333333
+            "val_f1": 0.4,
+            "best_threshold_val": 0.19
         },
         {
             "model": "RandomForest",
-            "best_threshold_val": 0.12000000000000001,
-            "val_f1": 0.4166666666666667,
-            "test_accuracy": 0.781021897810219,
-            "test_f1": 0.4444444444444444,
-            "test_auc": 0.8382513661202186,
-            "recall_risky_(B/D=1)": 0.8
+            "val_f1": 0.4444444444444444,
+            "best_threshold_val": 0.11000000000000001
         },
         {
             "model": "ExtraTrees",
-            "best_threshold_val": 0.14,
-            "val_f1": 0.4090909090909091,
-            "test_accuracy": 0.7445255474452555,
-            "test_f1": 0.38596491228070173,
-            "test_auc": 0.7953551912568306,
-            "recall_risky_(B/D=1)": 0.7333333333333333
+            "val_f1": 0.3728813559322034,
+            "best_threshold_val": 0.08000000000000002
         },
         {
             "model": "GradientBoosting",
-            "best_threshold_val": 0.1,
-            "val_f1": 0.4186046511627907,
-            "test_accuracy": 0.8102189781021898,
-            "test_f1": 0.43478260869565216,
-            "test_auc": 0.8568306010928962,
-            "recall_risky_(B/D=1)": 0.6666666666666666
+            "val_f1": 0.45,
+            "best_threshold_val": 0.1
         },
         {
             "model": "AdaBoost",
-            "best_threshold_val": 0.42000000000000004,
-            "val_f1": 0.5,
-            "test_accuracy": 0.8175182481751825,
-            "test_f1": 0.4897959183673469,
-            "test_auc": 0.8882513661202186,
-            "recall_risky_(B/D=1)": 0.8
+            "val_f1": 0.5116279069767442,
+            "best_threshold_val": 0.4100000000000001
         },
         {
             "model": "GaussianNB",
-            "best_threshold_val": 0.7000000000000002,
-            "val_f1": 0.2653061224489796,
-            "test_accuracy": 0.44525547445255476,
-            "test_f1": 0.2692307692307692,
-            "test_auc": 0.7092896174863388,
-            "recall_risky_(B/D=1)": 0.9333333333333333
+            "val_f1": 0.26262626262626265,
+            "best_threshold_val": 0.05
         },
         {
             "model": "KNN",
-            "best_threshold_val": 0.05,
-            "val_f1": 0.2857142857142857,
-            "test_accuracy": 0.7007299270072993,
-            "test_f1": 0.36923076923076925,
-            "test_auc": 0.764207650273224,
-            "recall_risky_(B/D=1)": 0.8
+            "val_f1": 0.3225806451612903,
+            "best_threshold_val": 0.05
         },
         {
             "model": "SVM",
-            "best_threshold_val": 0.09000000000000001,
-            "val_f1": 0.3880597014925373,
-            "test_accuracy": 0.6934306569343066,
-            "test_f1": 0.38235294117647056,
-            "test_auc": 0.8289617486338798,
-            "recall_risky_(B/D=1)": 0.8666666666666667
+            "val_f1": 0.4166666666666667,
+            "best_threshold_val": 0.23000000000000004
         },
         {
             "model": "XGBoost",
-            "best_threshold_val": 0.05,
             "val_f1": 0.41025641025641024,
-            "test_accuracy": 0.7956204379562044,
-            "test_f1": 0.391304347826087,
-            "test_auc": 0.8087431693989071,
-            "recall_risky_(B/D=1)": 0.6
+            "best_threshold_val": 0.05
         }
     ],
-    "note": "Threshold tuned on Validation set, evaluated on Test set"
+    "note": "Hyperparameters tuned on TRAIN, threshold on VAL, test used once."
 }

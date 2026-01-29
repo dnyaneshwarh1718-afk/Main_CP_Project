@@ -80,13 +80,12 @@ FROM client;
 
 -- CLEAN VIEW: DISTRICT
 DROP VIEW IF EXISTS vw_clean_district;
-
 CREATE VIEW vw_clean_district AS
 SELECT
     A1 as district_id,
-    TRIM(A2) AS district_name,
-    TRIM(A3) AS region,
-    TRIM(A4) AS no_of_inhabitants,
+    TRIM(A2) As A2,
+    TRIM(A3) As A3,
+    TRIM(A4) As A4,
     A5,
     A6,
     A7,
@@ -94,9 +93,10 @@ SELECT
     A9,
     A10,
     A11,
-    A12,
-    A13,
+    CAST(NULLIF(TRIM(A12), '?') AS DECIMAL(10,2)) AS A12,
+    CAST(NULLIF(TRIM(A13), '?') AS DECIMAL(10,2)) AS A13,
     A14,
-    A15,
-    A16
+    CAST(NULLIF(TRIM(A15), '?') AS UNSIGNED) As A15,
+    CAST(A16 AS UNSIGNED) AS A16
 FROM district;
+
