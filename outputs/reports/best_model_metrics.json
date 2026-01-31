@@ -1,59 +1,64 @@
 {
     "best_model": "AdaBoost",
-    "best_threshold": 0.4100000000000001,
-    "validation_f1": 0.5116279069767442,
+    "best_threshold": 0.41,
+    "validation_f1": 0.5116,
     "test_metrics": {
-        "test_accuracy": 0.8175182481751825,
-        "test_f1": 0.46808510638297873,
-        "test_auc": 0.8956284153005465,
-        "recall_risky_(B/D=1)": 0.7333333333333333
+        "accuracy": 0.8175,
+        "f1": 0.4681,
+        "auc": 0.8956,
+        "recall_default_(1)": 0.7333,
+        "precision_default_(1)": 0.3438,
+        "tp": 11,
+        "fp": 21,
+        "tn": 101,
+        "fn": 4
     },
     "all_models_validation": [
         {
             "model": "LogisticRegression",
-            "val_f1": 0.4,
-            "best_threshold_val": 0.19
+            "validation_f1": 0.4,
+            "best_threshold": 0.19
         },
         {
             "model": "RandomForest",
-            "val_f1": 0.4444444444444444,
-            "best_threshold_val": 0.11000000000000001
+            "validation_f1": 0.4444,
+            "best_threshold": 0.11
         },
         {
             "model": "ExtraTrees",
-            "val_f1": 0.3728813559322034,
-            "best_threshold_val": 0.08000000000000002
+            "validation_f1": 0.3729,
+            "best_threshold": 0.08
         },
         {
             "model": "GradientBoosting",
-            "val_f1": 0.45,
-            "best_threshold_val": 0.1
+            "validation_f1": 0.45,
+            "best_threshold": 0.1
         },
         {
             "model": "AdaBoost",
-            "val_f1": 0.5116279069767442,
-            "best_threshold_val": 0.4100000000000001
+            "validation_f1": 0.5116,
+            "best_threshold": 0.41
         },
         {
             "model": "GaussianNB",
-            "val_f1": 0.26262626262626265,
-            "best_threshold_val": 0.05
+            "validation_f1": 0.2626,
+            "best_threshold": 0.05
         },
         {
             "model": "KNN",
-            "val_f1": 0.3225806451612903,
-            "best_threshold_val": 0.05
+            "validation_f1": 0.3226,
+            "best_threshold": 0.05
         },
         {
             "model": "SVM",
-            "val_f1": 0.4166666666666667,
-            "best_threshold_val": 0.23000000000000004
+            "validation_f1": 0.4545,
+            "best_threshold": 0.25
         },
         {
             "model": "XGBoost",
-            "val_f1": 0.41025641025641024,
-            "best_threshold_val": 0.05
+            "validation_f1": 0.4103,
+            "best_threshold": 0.05
         }
     ],
-    "note": "Hyperparameters tuned on TRAIN, threshold on VAL, test used once."
+    "note": "Hyperparameters tuned on TRAIN, threshold optimized on VAL, test used once."
 }
