@@ -208,4 +208,5 @@ This project produces:
 ---
 
 ## Screenshots / Dashboard Preview
-- dashboard creation in processing  
+- <img width="1245" height="704" alt="image" src="https://github.com/user-attachments/assets/72ec6283-40b5-49ca-b78f-ff863acf973a" />
+
